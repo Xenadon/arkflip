@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1></h1>
+        
+        <div class="game-layout">
+            <div class="game-board">
+                <div id="grid" class="grid"></div>
+            </div>
+            
+            <div class="control-panel">
+                <div class="controls">
+                    <button id="resetBtn" class="btn">重置</button>
+                    <button id="refreshBtn" class="btn">刷新</button>
+                    <button id="settingsBtn" class="btn">设置</button>
+                </div>
+                
+                <div class="theme-controls">
+                    <label for="themeSelect">主题:</label>
+                    <select id="themeSelect" class="theme-select">
+                        <!-- 主题将通过JavaScript动态加载 -->
+                        <option value="add-theme">添加主题...</option>
+                    </select>
+                </div>
+
+                <!-- 简化后的提示功能区域 -->
+                <div class="hint-section">
+                    <h4>提示</h4>
+                    <select id="hintThemeSelect" class="theme-select">
+                        <!-- 提示主题将通过JavaScript动态加载 -->
+                        <option value="add-hint-theme">添加提示主题...</option>
+                    </select>
+                    
+                    <div class="hint-range">
+                        <label>提示范围:</label>
+                        <div id="hintCheckboxes" class="hint-checkboxes">
+                            <!-- 提示复选框将被动态填充 -->
+                        </div>
+                    </div>
+                    
+                    <button id="drawHintBtn" class="btn">抽取提示</button>
+                    <div id="hintDisplay" class="hint-display">
+                        <p>点击"抽取提示"获取游戏提示</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div id="settingsPanel" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>设置</h3>
+            <div class="setting-group">
+                <label>网格尺寸:</label>
+                <div class="input-group">
+                    <label for="gridN">行数 (N):</label>
+                    <input type="number" id="gridN" min="1" max="10" value="3">
+                </div>
+                <div class="input-group">
+                    <label for="gridM">列数 (M):</label>
+                    <input type="number" id="gridM" min="1" max="10" value="3">
+                </div>
+            </div>
+            <div class="setting-group">
+                <label for="alphaRange">透明度 (α):</label>
+                <input type="range" id="alphaRange" min="0" max="1" step="0.1" value="0.7">
+                <span id="alphaValue">0.7</span>
+            </div>
+            <div class="modal-buttons">
+                <button id="settingsCancel" class="btn btn-secondary">取消</button>
+                <button id="settingsSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加主题面板 -->
+    <div id="addThemePanel" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>添加主题</h3>
+            <div class="theme-form">
+                <div class="input-group">
+                    <label for="themeName">主题名称:</label>
+                    <input type="text" id="themeName" placeholder="请输入主题名称">
+                </div>
+                <div class="input-group">
+                    <label for="themeIds">图片ID列表 (每行一个):</label>
+                    <textarea id="themeIds" rows="5" placeholder="示例:
+1
+2
+3
+4
+5"></textarea>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="themeCancel" class="btn btn-secondary">取消</button>
+                <button id="themeSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加提示主题面板 -->
+    <div id="addHintPanel" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>添加提示主题</h3>
+            <div class="theme-form">
+                <div class="input-group">
+                    <label for="hintThemeName">提示主题名称:</label>
+                    <input type="text" id="hintThemeName" placeholder="请输入提示主题名称">
+                </div>
+                <div class="input-group">
+                    <label for="hintContents">提示内容列表 (每行一个提示):</label>
+                    <textarea id="hintContents" rows="8" placeholder="示例提示:
+尝试点击角落的方块
+观察图片的边缘特征
+寻找对比度较强的区域
+注意图片中的文本信息"></textarea>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="hintCancel" class="btn btn-secondary">取消</button>
+                <button id="hintSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
